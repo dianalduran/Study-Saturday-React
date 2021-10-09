@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const Student = require('../db/models/students');
-const Test = require('../db/models/tests');
+const router = require("express").Router();
+const Student = require("../db/models/students");
+const Test = require("../db/models/tests");
 
 // GET /student/:studentId
-router.get('/:studentId', async (req, res, next) => {
+router.get("/:studentId", async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.studentId);
     if (!student) return res.sendStatus(404);
@@ -14,7 +14,7 @@ router.get('/:studentId', async (req, res, next) => {
 });
 
 // GET /student/
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const students = await Student.findAll({
       include: Test,
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // POST /student/
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const student = await Student.create(req.body);
     res.json(student);
@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT /student/:id
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { firstName, lastName, email } = req.body;
     const student = await Student.findByPk(req.params.id);
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // DELETE /student/:id
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.id);
     if (student) {
